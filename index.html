@@ -191,7 +191,7 @@
   .li svg { display: block; width: 18px; height: 18px; }
 
   /* How it works */
-  .how { padding-top: clamp(24px, 4vw, 48px); }
+  .about { padding-top: clamp(24px, 4vw, 48px); }
   .how-head { position: relative; display: inline-block; margin-bottom: clamp(32px, 4vw, 48px); }
   .how-head h2 { font-size: clamp(48px, 7.5vw, 96px); font-weight: 800; letter-spacing: -0.02em; line-height: .95; }
   .how-head .script {
@@ -579,9 +579,9 @@
   <div class="wrap">
     <a class="logo" href="#top">Whoof</a>
     <ul>
-      <li><a href="#about">About us</a></li>
-      <li><a href="#how">How it works</a></li>
       <li><a href="#vision">Why Whoof</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#about">About us</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <!-- TODO: replace 91XXXXXXXXXX with your WhatsApp number (same as the footer button) -->
@@ -611,24 +611,34 @@
     </div>
   </section>
 
-  <!-- WHO WE ARE -->
-  <section class="pad about" id="about">
+  <!-- VISION -->
+  <section class="pad vision" id="vision">
     <div class="wrap">
-      <div class="top">
-        <h2>Who<br class="br-d"> We<br class="br-d"> Are</h2>
-        <div class="people">
-          <figure class="person">
-            <div class="photo"><img src="images/ayeshaa.jpg" alt="Ayeshaa playing with a golden retriever rolling on its back" loading="lazy"></div>
-            <figcaption><span class="name">Ayeshaa Mohan<a class="li" href="https://www.linkedin.com/in/ayeshaa-mohan/" target="_blank" rel="noopener" aria-label="Ayeshaa Mohan on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" transform="translate(-1.25 0.25)" d="M7 9.5h2.6V18H7zM8.3 5.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM11.2 9.5h2.5v1.2c.4-.7 1.3-1.4 2.6-1.4 2.7 0 3.2 1.8 3.2 4.1V18h-2.6v-4c0-1 0-2.2-1.4-2.2s-1.6 1.1-1.6 2.1V18h-2.7z"/></svg></a></span></figcaption>
-          </figure>
-          <figure class="person">
-            <div class="photo"><img src="images/kushagre.jpg" alt="Kushagre sitting outdoors with a light-coloured dog" loading="lazy"></div>
-            <figcaption><span class="name">Kushagre Gupta<a class="li" href="https://www.linkedin.com/in/kushagre-gupta/" target="_blank" rel="noopener" aria-label="Kushagre Gupta on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" transform="translate(-1.25 0.25)" d="M7 9.5h2.6V18H7zM8.3 5.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM11.2 9.5h2.5v1.2c.4-.7 1.3-1.4 2.6-1.4 2.7 0 3.2 1.8 3.2 4.1V18h-2.6v-4c0-1 0-2.2-1.4-2.2s-1.6 1.1-1.6 2.1V18h-2.7z"/></svg></a></span></figcaption>
-          </figure>
-          <figure class="person">
-            <div class="photo"><img src="images/milo.jpg" alt="Milo the golden retriever wearing sunglasses" loading="lazy"></div>
-            <figcaption><span class="name">Milo :)</span><small>The dog behind the inspiration</small></figcaption>
-          </figure>
+      <div class="copy">
+        <h2 class="section-title">Our Vision</h2>
+        <p>Pet parents often struggle to find someone they trust with their pet when they travel. They lean on friends, family and WhatsApp groups, or on kennels that can feel impersonal and a little scary.</p>
+        <p>Whoof is a trust-first pet-sitting network that makes those connections easier to discover and easier to trust.</p>
+        <blockquote>
+          <div class="bubble">
+            <span class="paws emoji" aria-hidden="true">🐾</span>
+            <p class="quote">“I plan my trips around my dog. If I can’t find someone I trust, I just cancel the plan.”</p>
+            <footer class="by">~ Neha, a pet parent from Hauz Khas</footer>
+          </div>
+        </blockquote>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <h3><span>Trust first</span></h3>
+          <p>Curated, verified hosts close to your home. You visit or call them before you leave your pet.</p>
+        </div>
+        <div class="pillar">
+          <h3><span>Peace of mind</span></h3>
+          <p>Photo and video updates during your pet’s stay, and the Whoof team is available throughout the sit!</p>
+        </div>
+        <!-- TODO: swap this placeholder for a scan of your real handwritten note -->
+        <div class="note" role="img" aria-label="Handwritten note from the Whoof founders">
+          Every dog who stays with us gets their own bed, their usual walks, and lots of belly rubs. Promise!
+          <span class="sig">— Ayeshaa &amp; Kushagre</span>
         </div>
       </div>
     </div>
@@ -688,34 +698,24 @@
     </div>
   </section>
 
-  <!-- VISION -->
-  <section class="pad vision" id="vision">
+  <!-- WHO WE ARE -->
+  <section class="pad about" id="about">
     <div class="wrap">
-      <div class="copy">
-        <h2 class="section-title">Our Vision</h2>
-        <p>Pet parents often struggle to find someone they trust with their pet when they travel. They lean on friends, family and WhatsApp groups, or on kennels that can feel impersonal and a little scary.</p>
-        <p>Whoof is a trust-first pet-sitting network that makes those connections easier to discover and easier to trust.</p>
-        <blockquote>
-          <div class="bubble">
-            <span class="paws emoji" aria-hidden="true">🐾</span>
-            <p class="quote">“I plan my trips around my dog. If I can’t find someone I trust, I just cancel the plan.”</p>
-            <footer class="by">~ a pet parent we interviewed</footer>
-          </div>
-        </blockquote>
-      </div>
-      <div class="pillars">
-        <div class="pillar">
-          <h3><span>Trust first</span></h3>
-          <p>Curated, verified hosts close to your home. You visit or call them before you leave your pet.</p>
-        </div>
-        <div class="pillar">
-          <h3><span>Peace of mind</span></h3>
-          <p>Photo and video updates during your pet’s stay, and the Whoof team is available throughout the sit!</p>
-        </div>
-        <!-- TODO: swap this placeholder for a scan of your real handwritten note -->
-        <div class="note" role="img" aria-label="Handwritten note from the Whoof founders">
-          Every dog who stays with us gets their own bed, their usual walks, and lots of belly rubs. Promise!
-          <span class="sig">— Ayeshaa &amp; Kushagre</span>
+      <div class="top">
+        <h2>Who<br class="br-d"> We<br class="br-d"> Are</h2>
+        <div class="people">
+          <figure class="person">
+            <div class="photo"><img src="images/ayeshaa.jpg" alt="Ayeshaa playing with a golden retriever rolling on its back" loading="lazy"></div>
+            <figcaption><span class="name">Ayeshaa Mohan<a class="li" href="https://www.linkedin.com/in/ayeshaa-mohan/" target="_blank" rel="noopener" aria-label="Ayeshaa Mohan on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" transform="translate(-1.25 0.25)" d="M7 9.5h2.6V18H7zM8.3 5.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM11.2 9.5h2.5v1.2c.4-.7 1.3-1.4 2.6-1.4 2.7 0 3.2 1.8 3.2 4.1V18h-2.6v-4c0-1 0-2.2-1.4-2.2s-1.6 1.1-1.6 2.1V18h-2.7z"/></svg></a></span></figcaption>
+          </figure>
+          <figure class="person">
+            <div class="photo"><img src="images/kushagre.jpg" alt="Kushagre sitting outdoors with a light-coloured dog" loading="lazy"></div>
+            <figcaption><span class="name">Kushagre Gupta<a class="li" href="https://www.linkedin.com/in/kushagre-gupta/" target="_blank" rel="noopener" aria-label="Kushagre Gupta on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" transform="translate(-1.25 0.25)" d="M7 9.5h2.6V18H7zM8.3 5.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM11.2 9.5h2.5v1.2c.4-.7 1.3-1.4 2.6-1.4 2.7 0 3.2 1.8 3.2 4.1V18h-2.6v-4c0-1 0-2.2-1.4-2.2s-1.6 1.1-1.6 2.1V18h-2.7z"/></svg></a></span></figcaption>
+          </figure>
+          <figure class="person">
+            <div class="photo"><img src="images/milo.jpg" alt="Milo the golden retriever wearing sunglasses" loading="lazy"></div>
+            <figcaption><span class="name">Milo :)</span><small>The dog behind the inspiration</small></figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -862,8 +862,8 @@
       <div>
         <h4>Explore</h4>
         <ul>
-          <li><a href="#about">About us</a></li>
           <li><a href="#how">How it works</a></li>
+          <li><a href="#about">About us</a></li>
           <li><a href="#get-started" data-open="find">Find / Become a sitter</a></li>
         </ul>
       </div>
