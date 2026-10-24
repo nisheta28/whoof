@@ -290,7 +290,6 @@
     display: flex; align-items: center; justify-content: flex-end; gap: 8px;
     margin-top: 14px; font: 700 21px/1 var(--hand); color: var(--script);
   }
-  .bubble .by svg { width: 26px; height: 10px; flex: none; }
   .emoji { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
   .pillars { display: flex; flex-direction: column; }
   .pillar { border-top: 2px solid var(--forest); padding: 22px 0 30px; }
@@ -522,6 +521,7 @@
   @media (max-width: 820px) {
     body { font-size: 16px; }
     .hero .wrap, .about .top, .vision .wrap, .faq .wrap { grid-template-columns: 1fr; }
+    .about h2 br { display: none; }
     .hero-art { max-width: 460px; width: 100%; margin: 24px auto 0; }
     .steps { flex-direction: column; height: auto; }
     .step { flex: none; transition: none; }
@@ -614,7 +614,7 @@
   <section class="pad about" id="about">
     <div class="wrap">
       <div class="top">
-        <h2>Who<br>We<br>Are</h2>
+        <h2>Who<br class="br-d"> We<br class="br-d"> Are</h2>
         <div class="people">
           <figure class="person">
             <div class="photo"><img src="images/ayeshaa.jpg" alt="Ayeshaa playing with a golden retriever rolling on its back" loading="lazy"></div>
@@ -698,7 +698,7 @@
           <div class="bubble">
             <span class="paws emoji" aria-hidden="true">🐾</span>
             <p class="quote">“I plan my trips around my dog. If I can’t find someone I trust, I just cancel the plan.”</p>
-            <footer class="by"><svg viewBox="0 0 34 12" aria-hidden="true"><path d="M2 8c4-6 7-6 10 0s6 6 10 0 7-6 10 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>a pet parent we interviewed</footer>
+            <footer class="by">~ a pet parent we interviewed</footer>
           </div>
         </blockquote>
       </div>
