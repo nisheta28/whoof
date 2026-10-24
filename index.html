@@ -548,7 +548,8 @@
     .wipe[data-mode="find"] { top: 0; }
     .wipe[data-mode="become"] { bottom: 0; }
     .wipe.full { height: 100%; }
-    footer.site .grid { grid-template-columns: 1fr; gap: 32px; }
+    footer.site .grid { grid-template-columns: 1fr 1fr; gap: 36px 20px; }
+    footer.site .grid > div:first-child { grid-column: 1 / -1; }
   }
   @media (max-width: 640px) {
     .notebook { grid-template-columns: 1fr; }
@@ -994,14 +995,16 @@
   addEventListener("resize", updateNavTone);
   updateNavTone();
 
-  // How it works: one panel open at a time, advancing every few seconds while on screen and not hovered
+  // How it works: one panel open at a time. On desktop it advances every few seconds while on screen
+  // and not hovered. On phones it never auto-advances, and once anyone picks a step it stays put
   const stepsEl = document.getElementById("steps");
   const steps = [...stepsEl.querySelectorAll(".step")];
   const STEP_DELAY = 11000;
-  let current = 0, stepTimer, stepsHovered = false, stepsInView = false;
+  const phone = matchMedia("(max-width: 820px)");
+  let current = 0, stepTimer, stepsHovered = false, stepsInView = false, userPicked = false;
   function scheduleStep() {
     clearTimeout(stepTimer);
-    if (reduceMotion.matches) return;
+    if (reduceMotion.matches || phone.matches || userPicked) return;
     stepTimer = setTimeout(() => {
       if (stepsHovered || !stepsInView) return scheduleStep();
       openStep((current + 1) % steps.length);
@@ -1018,7 +1021,12 @@
     });
     scheduleStep();
   }
-  steps.forEach((s, i) => s.querySelector(".step-tab").addEventListener("click", () => openStep(i)));
+  steps.forEach((s, i) => s.querySelector(".step-tab").addEventListener("click", () => {
+    userPicked = true;
+    openStep(i);
+    // On phones the panels stack, so keep the one just opened in view as the others fold away
+    if (phone.matches) s.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+  }));
   stepsEl.addEventListener("mouseenter", () => (stepsHovered = true));
   stepsEl.addEventListener("mouseleave", () => (stepsHovered = false));
   stepsEl.addEventListener("focusin", () => (stepsHovered = true));
