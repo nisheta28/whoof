@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whoof — Your pet's home away from home</title>
+<meta name="description" content="Whoof connects pet parents in Delhi NCR with loving, carefully verified hosts for personal, home-based pet care.">
+<meta property="og:title" content="Whoof — Your pet's home away from home">
+<meta property="og:description" content="Personal, home-based pet sitting across Delhi NCR. A home, not a kennel.">
+<meta property="og:image" content="images/hero-puppy.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231C3328'/%3E%3Cg fill='%2363BF6F'%3E%3Cellipse cx='32' cy='41' rx='12' ry='10'/%3E%3Ccircle cx='17' cy='27' r='5.5'/%3E%3Ccircle cx='26' cy='18' r='5.5'/%3E%3Ccircle cx='38' cy='18' r='5.5'/%3E%3Ccircle cx='47' cy='27' r='5.5'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1C3328;
+    --forest-2: #24402F;
+    --leaf: #63BF6F;
+    --leaf-dark: #4FA95B;
+    --butter: #F0D36E;
+    --butter-dark: #E6C551;
+    --cream: #F6F1E7;
+    --paper: #FFFDF8;
+    --ink: #1C3328;
+    --ink-soft: #3E5446;
+    --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    --body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --hand: "Caveat", "Bradley Hand", cursive;
+    --script: #3E9A4B;
+    --radius: 8px;
+    --wrap: 1320px;
+    --gutter: clamp(16px, 5vw, 64px);
+    /* Smooth wavy edge, used as a mask for the footer divider */
+    --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20C30 6 90 6 120 20S210 34 240 20V40H0z'/%3E%3C/svg%3E");
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font: 17px/1.55 var(--body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.02; margin: 0; letter-spacing: -0.01em; }
+  p { margin: 0; }
+  [hidden] { display: none !important; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  :focus-visible { outline: 3px solid var(--butter); outline-offset: 3px; border-radius: 4px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font: 700 16px/1 var(--display);
+    padding: 15px 26px; border-radius: var(--radius);
+    border: 0; cursor: pointer; text-decoration: none;
+    transition: transform .15s ease, background-color .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+  .btn-leaf { background: var(--leaf); color: var(--forest); }
+  .btn-leaf:hover { background: var(--leaf-dark); }
+  .btn-butter { background: var(--butter); color: var(--forest); }
+  .btn-butter:hover { background: var(--butter-dark); }
+  .btn-forest { background: var(--forest); color: var(--cream); }
+  .btn-forest:hover { background: var(--forest-2); }
+  .btn[disabled] { opacity: .6; cursor: progress; transform: none; }
+  .link {
+    font: 700 15px var(--display); color: inherit;
+    background: none; border: 0; padding: 0; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 4px;
+  }
+
+  /* Wavy divider: sits on top of a section, in that section's colour */
+  .wave { position: relative; }
+  .wave::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -39px; height: 40px; z-index: 2;
+    background: var(--wave-color, var(--cream));
+    -webkit-mask: var(--wave) repeat-x left bottom / 240px 40px;
+            mask: var(--wave) repeat-x left bottom / 240px 40px;
+    pointer-events: none;
+  }
+
+  /* Polaroid photo cards */
+  .photo {
+    background: var(--paper);
+    padding: 7px;
+    border-radius: 10px;
+    box-shadow: 0 14px 30px -12px rgba(0,0,0,.35);
+    transform: rotate(var(--tilt, 0deg));
+    transition: transform .3s ease;
+  }
+  .photo img { border-radius: 5px; width: 100%; height: 100%; object-fit: cover; }
+  .photo:hover { transform: rotate(0deg) scale(1.02); }
+  .sticker {
+    display: inline-block;
+    background: var(--butter); color: var(--forest);
+    font: 700 17px var(--display);
+    padding: 9px 16px; border-radius: 6px;
+    transform: rotate(var(--tilt, 2deg));
+    box-shadow: 0 6px 14px -6px rgba(0,0,0,.35);
+  }
+
+  /* Nav */
+  /* Floating liquid-glass bar: a light frosted pane with dark text. Over the dark hero and footer it
+     switches to clear glass with light text (JS toggles .on-dark based on what's underneath) */
+  .nav {
+    position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 50;
+    width: min(calc(100% - 24px), 1040px);
+    border-radius: 16px;
+    background: rgba(255,253,248,.6);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+            backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255,255,255,.55);
+    box-shadow: 0 8px 24px -14px rgba(28,51,40,.35);
+    color: var(--forest);
+    transition: background-color .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .nav.on-dark {
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.16);
+    color: var(--cream);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 16px; max-width: none; padding: 0 7px 0 18px; }
+  .logo { font: 800 23px var(--display); text-decoration: none; letter-spacing: -0.02em; }
+  .nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+  .nav ul a { text-decoration: none; font-weight: 600; font-size: 14px; opacity: .8; }
+  .nav ul a:hover { opacity: 1; }
+  .nav .btn { padding: 9px 15px; font-size: 14px; border-radius: 11px; }
+
+  /* Hero */
+  .hero {
+    /* Soft vertical stripes: leaf green at 3% over the forest base */
+    background:
+      repeating-linear-gradient(90deg, rgba(99,191,111,.03) 0 88px, transparent 88px 176px),
+      var(--forest);
+    color: var(--cream);
+    min-height: 100vh; min-height: 100svh;
+    display: flex; align-items: center;
+    padding: calc(76px + clamp(24px, 4vw, 48px)) 0 clamp(56px, 7vw, 88px);
+  }
+  .hero .wrap { width: 100%; }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
+  .hero h1 { font-size: clamp(48px, 7.4vw, 92px); font-weight: 800; }
+  .hero h1 span { color: var(--leaf); display: block; }
+  /* Marker highlight: a faint band through the lower body of the letters, from just above the baseline to the x-height */
+  .hero h1 .hl {
+    display: inline;
+    background: linear-gradient(to top, transparent 17%, rgba(214,247,200,.09) 17%, rgba(214,247,200,.09) 49%, transparent 49%);
+    padding: 0 .06em;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .hero p.lede { margin-top: 28px; max-width: 30em; font-size: 18px; opacity: .92; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .hero-art { position: relative; aspect-ratio: 1 / 1.05; }
+  .hero-art .main { position: absolute; top: 0; right: 7%; width: 68%; height: 86%; --tilt: 1.5deg; }
+  .hero-art .side-a { position: absolute; left: 0; top: 46%; width: 40%; height: 46%; --tilt: -4deg; }
+  .hero-art .side-b { position: absolute; right: 0; bottom: -4%; width: 32%; height: 36%; --tilt: 3deg; }
+  .hero-art .sticker { position: absolute; right: 1%; top: -16px; --tilt: 5deg; z-index: 2; }
+
+  /* Section shells */
+  section { position: relative; }
+  .pad { padding: clamp(64px, 10vw, 120px) 0; }
+  .eyebrow {
+    font: 700 13px var(--display); text-transform: uppercase; letter-spacing: .12em;
+    color: var(--leaf-dark); margin-bottom: 14px;
+  }
+  .section-title { font-size: clamp(40px, 6vw, 72px); font-weight: 800; }
+
+  /* Who we are */
+  .about .top { display: grid; grid-template-columns: 0.8fr 2fr; gap: 40px; align-items: center; }
+  .about h2 { font-size: clamp(56px, 9vw, 112px); font-weight: 800; line-height: .95; }
+  .people { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
+  .person { margin: 0; }
+  .person .photo { aspect-ratio: 3 / 4; }
+  .person:nth-child(1) .photo { --tilt: -2.5deg; }
+  .person:nth-child(2) .photo { --tilt: 1.5deg; }
+  .person:nth-child(3) .photo { --tilt: 2.5deg; }
+  .person figcaption {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; margin-top: 18px; font-weight: 600; font-size: 16px; line-height: 1.35;
+  }
+  .person figcaption .name { display: inline-flex; align-items: center; gap: 7px; min-height: 22px; }
+  .person figcaption small { display: block; font-weight: 400; color: var(--ink-soft); font-size: 14px; }
+  .li { display: inline-flex; align-items: center; line-height: 0; }
+  .li svg { display: block; width: 18px; height: 18px; }
+
+  /* How it works */
+  .how { padding-top: clamp(24px, 4vw, 48px); }
+  .how-head { position: relative; display: inline-block; margin-bottom: clamp(32px, 4vw, 48px); }
+  .how-head h2 { font-size: clamp(48px, 7.5vw, 96px); font-weight: 800; letter-spacing: -0.02em; line-height: .95; }
+  .how-head .script {
+    position: absolute; right: -2.4em; bottom: -0.32em;
+    font: 700 clamp(34px, 4.4vw, 58px)/1 var(--hand); color: var(--script);
+    transform: rotate(-5deg); white-space: nowrap;
+  }
+
+  /* Expanding steps: one open panel, two collapsed strips. Auto-advances while in view; click a strip to open it */
+  .steps {
+    --ease: cubic-bezier(.65,0,.25,1);
+    --pad: clamp(28px, 3vw, 44px);
+    --closed-w: calc((min(var(--wrap), 100vw) - 2 * var(--gutter) - 28px) / 8.5);
+    display: flex; gap: 14px; height: 640px;
+  }
+  .step {
+    position: relative; overflow: hidden; border-radius: 22px;
+    flex: 1 1 0; min-width: 0;
+    transition: flex-grow .8s var(--ease);
+  }
+  .step.is-open { flex-grow: 6.5; }
+  .s1 { background: var(--forest); color: var(--cream); }
+  .s2 { background: var(--leaf); color: var(--forest); }
+  .s3 { background: var(--butter); color: var(--forest); }
+  .step-num {
+    position: absolute; right: 14px; bottom: -0.17em;
+    font: 800 clamp(120px, 12vw, 170px)/1 var(--display); letter-spacing: -0.04em;
+    opacity: .2; pointer-events: none;
+  }
+  .step-tab { position: absolute; inset: 0; border: 0; background: none; cursor: pointer; z-index: 3; }
+  .step-tab:focus-visible { outline-offset: -6px; border-radius: 22px; }
+  .step.is-open .step-tab { display: none; }
+  /* Title turns from a vertical handwritten label into a horizontal heading as the panel opens */
+  .step-title {
+    position: absolute; left: var(--pad); top: var(--pad); z-index: 2;
+    display: grid; transform-origin: 0 0; pointer-events: none;
+    transition: transform .8s var(--ease);
+  }
+  .step-title > span { grid-area: 1 / 1; align-self: center; white-space: nowrap; transition: opacity .55s ease; }
+  .t-hand { font: 700 30px/1 var(--hand); }
+  .t-display { font: 800 clamp(32px, 3.2vw, 44px)/1.05 var(--display); letter-spacing: -0.01em; opacity: 0; }
+  .s1 .t-display { color: var(--butter); }
+  .step:not(.is-open) .step-title { transform: translate(calc(var(--closed-w) / 2 + 22px - var(--pad)), calc(30px - var(--pad))) rotate(90deg); }
+  .step.is-open .t-hand { opacity: 0; }
+  .step.is-open .t-display { opacity: 1; }
+  /* Body is sized to the open width so its content never reflows mid-animation */
+  .step-body {
+    position: absolute; top: 0; left: 0; bottom: 0;
+    width: calc(var(--closed-w) * 6.5);
+    padding: calc(var(--pad) + 50px) var(--pad) var(--pad);
+    display: flex; flex-direction: column;
+    opacity: 0; visibility: hidden;
+    transition: opacity .25s ease, visibility 0s .25s;
+  }
+  .step.is-open .step-body { opacity: 1; visibility: visible; transition: opacity .5s ease .3s, visibility 0s; }
+  .step-body p { font-size: 18px; max-width: 30em; }
+  .step-art { position: relative; flex: 1; display: grid; place-items: center; margin-top: 18px; }
+  .step-art .photo { width: 300px; aspect-ratio: 3 / 4; --tilt: -4deg; }
+  .step-art .photo.wide { width: 440px; aspect-ratio: 4 / 3; --tilt: 3deg; }
+  /* Little profile tags scattered around the photo */
+  .tag {
+    position: absolute; z-index: 1;
+    font: 600 17px/1 var(--body); white-space: nowrap;
+    padding: 11px 16px; border-radius: 8px;
+    background: var(--leaf); color: var(--forest);
+    transform: rotate(var(--tilt, 0deg));
+    box-shadow: 0 6px 14px -6px rgba(0,0,0,.35);
+  }
+  .s2 .tag, .s3 .tag { background: var(--forest); color: var(--cream); }
+  .tag-a { left: 14%; top: 12%; --tilt: -6deg; }
+  .tag-b { right: 12%; top: 54%; --tilt: 4deg; }
+  .tag-c { left: 18%; bottom: 4%; --tilt: -3deg; }
+
+  /* Vision */
+  .vision { background: var(--leaf); }
+  .vision .wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 6vw, 80px); }
+  .vision .copy p { font-size: 19px; margin-top: 24px; max-width: 30em; }
+  .vision blockquote { margin: 60px 0 0; max-width: 27em; }
+  /* Rounded speech bubble with the attribution tucked inside */
+  .bubble {
+    position: relative;
+    background: var(--paper);
+    border-radius: 40px;
+    padding: 30px 34px 30px;
+    transform: rotate(-2deg);
+    box-shadow: 0 18px 30px -18px rgba(0,0,0,.35);
+  }
+  .bubble .paws {
+    position: absolute; top: -16px; right: 26px;
+    background: var(--butter); border-radius: 999px; padding: 5px 12px;
+    font-size: 16px; line-height: 1; transform: rotate(9deg);
+    box-shadow: 0 6px 12px -6px rgba(0,0,0,.3);
+  }
+  .vision blockquote p.quote { font: 800 clamp(22px, 2.4vw, 28px)/1.22 var(--display); margin: 0; max-width: none; }
+  .bubble .by {
+    display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+    margin-top: 14px; font: 700 21px/1 var(--hand); color: var(--script);
+  }
+  .bubble .by svg { width: 26px; height: 10px; flex: none; }
+  .emoji { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+  .pillars { display: flex; flex-direction: column; }
+  .pillar { border-top: 2px solid var(--forest); padding: 22px 0 30px; }
+  .pillar h3 { font-size: clamp(30px, 3.4vw, 40px); font-weight: 800; margin-bottom: 14px; }
+  /* Marker highlight over the bottom half of the text */
+  .pillar h3 span {
+    background: linear-gradient(to top, rgba(214,247,200,.55) 0, rgba(214,247,200,.55) 46%, transparent 46%);
+    padding: 0 .1em;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .pillar p { max-width: 26em; }
+  .note {
+    margin: 12px auto 0; width: min(280px, 80%);
+    background: var(--paper);
+    padding: 28px 24px 34px;
+    transform: rotate(-2deg);
+    box-shadow: 0 18px 32px -14px rgba(0,0,0,.35);
+    font: 700 28px/1.2 var(--hand);
+    color: var(--ink);
+    position: relative;
+  }
+  .note::before {
+    content: ""; position: absolute; top: -12px; left: 50%; width: 90px; height: 24px;
+    transform: translateX(-50%) rotate(3deg);
+    background: rgba(240,211,110,.85);
+  }
+  .note .sig { display: block; text-align: right; margin-top: 14px; font-weight: 700; }
+  /* To use a real scan: replace .note contents with <img src="images/note.jpg" alt="..."> */
+
+  /* Split CTA + expanding form panel */
+  .split {
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--cream);
+    /* Clip the slide-in sideways, but let the photo poke out above the section */
+    overflow-x: clip; overflow-y: visible;
+    z-index: 3;
+  }
+  /* Entrance: halves slide in from either side, meet in the middle, then the photo pops in */
+  .split.pre > .left, .split.pre > .right { transition: transform .85s cubic-bezier(.3,1.22,.5,1); }
+  .split.pre:not(.in) > .left { transform: translateX(-100%); }
+  .split.pre:not(.in) > .right { transform: translateX(100%); }
+  .split.pre:not(.in) > .photo { opacity: 0; }
+  .split.pre.in > .photo { animation: photo-pop .5s ease-out .8s backwards; }
+  @keyframes photo-pop {
+    from { opacity: 0; transform: translateX(-50%) rotate(var(--tilt)) scale(.85); }
+    to { opacity: 1; transform: translateX(-50%) rotate(var(--tilt)); }
+  }
+  .split > .left, .split > .right { padding: clamp(72px, 10vw, 128px) var(--gutter); display: flex; flex-direction: column; justify-content: center; }
+  /* Outer padding lines the text up with the centred page width used by every other section */
+  .split .left {
+    background: var(--forest); color: var(--cream); align-items: flex-start;
+    padding-left: calc(max(0px, 100% - var(--wrap) / 2) + var(--gutter));
+    padding-right: calc(var(--gutter) + 56px);
+  }
+  .split .right {
+    background: var(--butter); color: var(--forest);
+    padding-left: calc(var(--gutter) + 56px);
+    padding-right: calc(max(0px, 100% - var(--wrap) / 2) + var(--gutter));
+  }
+  /* Desktop: a big photo pokes in at the top centre; the text in both halves starts just below it */
+  .split { --pw: clamp(220px, 22vw, 320px); }
+  @media (min-width: 821px) {
+    .split > .left, .split > .right {
+      justify-content: flex-start; /* both headings start at the same height, just below the photo */
+      padding-top: calc(var(--pw) * 4 / 3 - 20px);
+      padding-bottom: clamp(64px, 8vw, 104px);
+    }
+    .split .left { padding-right: var(--gutter); }
+    .split .right { padding-left: var(--gutter); }
+  }
+  .split h2 { font-size: clamp(38px, 4.4vw, 60px); font-weight: 800; text-wrap: balance; }
+  /* Desktop: both headings break onto the same three lines so the two halves match */
+  .split h2 br.br-d { display: none; }
+  @media (min-width: 821px) { .split h2 br.br-d { display: inline; } .split h2 { white-space: nowrap; } }
+  .split p { margin-top: 18px; max-width: 26em; font-size: 18px; }
+  .split .btn { margin-top: 36px; align-self: flex-start; }
+  .split .left > *, .split .right > * { max-width: 560px; }
+  .split > .photo {
+    position: absolute; left: 50%; top: -52px;
+    width: var(--pw); aspect-ratio: 3/4;
+    transform: translateX(-50%) rotate(var(--tilt));
+    --tilt: 3deg;
+  }
+  .split > .photo:hover { transform: translateX(-50%) rotate(0) scale(1.02); }
+  .split:not([data-state="closed"]) > .left,
+  .split:not([data-state="closed"]) > .right,
+  .split:not([data-state="closed"]) > .photo { display: none; }
+
+  /* Colour wipe: the clicked half grows to fill the section, then the form fades in */
+  .wipe {
+    position: absolute; top: 0; bottom: 0; width: 50%; z-index: 3;
+    pointer-events: none; opacity: 0;
+    transition: width .6s cubic-bezier(.65,0,.25,1), height .6s cubic-bezier(.65,0,.25,1), opacity .2s ease;
+  }
+  .wipe[data-mode="find"] { left: 0; background: var(--forest); }
+  .wipe[data-mode="become"] { right: 0; background: var(--butter); }
+  .wipe.on { opacity: 1; }
+  .wipe.full { width: 100%; }
+
+  .panel {
+    grid-column: 1 / -1;
+    position: relative;
+    background: var(--forest);
+    padding: clamp(32px, 4vw, 48px) var(--gutter) clamp(56px, 7vw, 88px);
+    transition: background-color .45s ease;
+  }
+  .split[data-state="become"] .panel { background: var(--butter); }
+  .panel.enter .notebook { animation: rise .45s both ease-out; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  .cards { position: relative; z-index: 1; }
+  .close {
+    position: absolute; top: 16px; right: 16px; z-index: 1;
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 0; cursor: pointer;
+    background: rgba(28,51,40,.08); color: var(--forest);
+    display: grid; place-items: center;
+    transition: transform .2s ease, background-color .2s ease;
+  }
+  .close:hover { transform: rotate(90deg); background: rgba(28,51,40,.14); }
+  .close svg { width: 16px; height: 16px; }
+
+  /* Notebook: tabs down the left edge of the card */
+  .notebook { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr; align-items: start; }
+  .tabs { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+  /* Unselected: a solid coloured notebook tab, nudged in and tucked under the card's edge.
+     Selected: card-coloured, sits on top of the card and joins it like an extension of the page.
+     The nudge uses transform (not margin) so hovering never changes the layout */
+  .tab {
+    position: relative; z-index: 0;
+    border: 0; cursor: pointer;
+    margin: 0 -2px 0 0;
+    padding: 20px 16px 20px 10px;
+    border-radius: 12px 0 0 12px;
+    font: 700 16px var(--display); color: var(--forest);
+    box-shadow: inset -10px 0 12px -10px rgba(0,0,0,.4);
+    transform: translateX(6px);
+    transition: transform .2s ease, filter .2s ease;
+  }
+  .tab[data-tab="find"] { background: var(--leaf); }
+  .tab[data-tab="become"] { background: var(--butter); }
+  .tab:not([aria-selected="true"]):hover { transform: translateX(1px); filter: brightness(1.05); }
+  .tab span { display: block; writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
+  .tab[aria-selected="true"],
+  .split[data-state="become"] .tab[aria-selected="true"] {
+    z-index: 2;
+    padding: 22px 16px 22px 13px;
+    background: var(--cream); color: var(--forest);
+    box-shadow: none; filter: none; transform: none;
+  }
+  /* Straight colour bar inside the selected tab: green for Find, yellow for Become */
+  .tab[aria-selected="true"]::before {
+    content: ""; position: absolute; left: 7px; top: 18px; bottom: 18px; width: 4px;
+    border-radius: 2px; background: var(--leaf);
+  }
+  .split[data-state="become"] .tab[aria-selected="true"]::before { background: var(--butter-dark); }
+  .tab:focus-visible { outline-offset: -3px; }
+
+  .card {
+    background: var(--cream); border-radius: 14px;
+    padding: clamp(24px, 4vw, 44px);
+    box-shadow: 0 24px 50px -24px rgba(0,0,0,.45);
+  }
+  .card .intro { color: var(--ink-soft); font-size: 18px; padding-right: 44px; }
+  .field { margin-top: 18px; }
+  .field label, .field legend { display: block; font: 700 13px var(--display); margin-bottom: 7px; padding: 0; }
+  .field label .opt, .field legend .opt { font-weight: 600; opacity: .65; }
+  fieldset.field { border: 0; margin: 18px 0 0; padding: 0; min-width: 0; }
+  .field .sub { font-weight: 600; font-size: 12px; opacity: .75; }
+  .field input, .field textarea {
+    width: 100%; font: 16px var(--body); color: var(--ink);
+    background: #fff; border: 1.5px solid var(--forest); border-radius: var(--radius);
+    padding: 12px 13px; color-scheme: light;
+  }
+  .field input[type="date"] { min-height: 49px; }
+  .field textarea { min-height: 96px; resize: vertical; }
+  .field input:focus, .field textarea:focus { outline: 3px solid rgba(99,191,111,.55); outline-offset: 1px; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+  .row-2 .field:first-child, .row-2 > div { min-width: 0; }
+  .form-actions { display: flex; justify-content: flex-end; margin-top: 28px; }
+  .form-error { margin-top: 16px; color: #8E2A1E; font-weight: 600; font-size: 15px; }
+  .form-error:empty { display: none; }
+  .thanks h3 { font-size: clamp(32px, 4vw, 42px); }
+  .thanks p { margin-top: 16px; color: var(--ink-soft); max-width: 26em; }
+  .thanks .btn { margin-top: 32px; }
+  .hp { position: absolute; left: -9999px; }
+
+  /* FAQ */
+  .faq { background: var(--cream); }
+  .faq .wrap { display: grid; grid-template-columns: 0.8fr 1.4fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+  .faq .side p { margin-top: 22px; color: var(--ink-soft); }
+  .faq .side p span { display: block; }
+  .faq details { border-bottom: 1.5px solid rgba(28,51,40,.18); }
+  .faq details:first-child { border-top: 1.5px solid rgba(28,51,40,.18); }
+  .faq summary {
+    list-style: none; cursor: pointer; padding: 22px 44px 22px 0; position: relative;
+    font: 700 20px/1.3 var(--display);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+    width: 30px; height: 30px; border-radius: 50%; background: var(--butter);
+    display: grid; place-items: center; font: 700 20px/1 var(--display);
+  }
+  .faq details[open] summary::after { content: "–"; background: var(--leaf); }
+  .faq details p { padding: 0 44px 24px 0; color: var(--ink-soft); }
+
+  /* Footer */
+  footer.site { --wave-color: var(--forest); background: var(--forest); color: var(--cream); padding: clamp(64px, 8vw, 96px) 0 32px; }
+  footer.site .grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+  footer.site .big { font: 800 clamp(34px, 4.4vw, 52px)/1.05 var(--display); }
+  footer.site .big span { color: var(--leaf); display: block; }
+  footer.site h4 { font: 700 13px var(--display); text-transform: uppercase; letter-spacing: .12em; margin: 0 0 16px; color: var(--butter); }
+  footer.site ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  footer.site ul a { text-decoration: none; opacity: .9; }
+  footer.site ul a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+  footer.site .base {
+    margin-top: 56px; padding-top: 22px; border-top: 1px solid rgba(246,241,231,.18);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 14px; opacity: .75;
+  }
+  footer.site .heart { color: var(--leaf); }
+  .wa { display: inline-flex; align-items: center; gap: 10px; margin-top: 24px; }
+  .wa svg { width: 20px; height: 20px; }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .nav ul { display: none; }
+  }
+  @media (max-width: 820px) {
+    body { font-size: 16px; }
+    .hero .wrap, .about .top, .vision .wrap, .faq .wrap { grid-template-columns: 1fr; }
+    .hero-art { max-width: 460px; width: 100%; margin: 24px auto 0; }
+    .steps { flex-direction: column; height: auto; }
+    .step { flex: none; transition: none; }
+    .step-title { position: relative; left: auto; top: auto; padding: 24px; transform: none !important; }
+    .step-title > span { white-space: normal; }
+    .step-body { position: relative; width: auto; display: none; padding: 0 24px 56px; }
+    .step.is-open .step-body { display: flex; }
+    .step-art { min-height: 360px; }
+    .step-art .photo { width: 230px; }
+    .step-art .photo.wide { width: 270px; }
+    .tag { font-size: 15px; padding: 9px 13px; }
+    .tag-a { left: 0; }
+    .tag-b { right: 0; }
+    .tag-c { left: 4%; }
+    .step-num { font-size: 100px; }
+    .how-head .script { right: 0; }
+    .people { gap: 12px; }
+    .person figcaption { font-size: 14px; }
+    .split { grid-template-columns: 1fr; }
+    .split .left { padding-right: var(--gutter); padding-bottom: 140px; }
+    .split .right { padding-left: var(--gutter); padding-top: 150px; }
+    .split > .photo { left: 50%; top: calc(50% - 125px); bottom: auto; width: 170px; }
+    .wipe { left: 0; right: 0; width: 100%; height: 50%; top: auto; bottom: auto; }
+    .wipe[data-mode="find"] { top: 0; }
+    .wipe[data-mode="become"] { bottom: 0; }
+    .wipe.full { height: 100%; }
+    footer.site .grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  @media (max-width: 640px) {
+    .notebook { grid-template-columns: 1fr; }
+    .tabs { flex-direction: row; margin: 0; gap: 6px; align-items: flex-end; }
+    .tab { flex: 1; margin: 0 0 -2px; padding: 12px 10px 18px; border-radius: 12px 12px 0 0; box-shadow: inset 0 -10px 12px -10px rgba(0,0,0,.4); transform: translateY(8px); }
+    .tab:not([aria-selected="true"]):hover { transform: translateY(4px); }
+    .tab span { writing-mode: horizontal-tb; transform: none; }
+    .tab[aria-selected="true"],
+    .split[data-state="become"] .tab[aria-selected="true"] { margin: 0 0 -2px; padding: 14px 10px 22px; border-radius: 12px 12px 0 0; }
+    .tab[aria-selected="true"]::before { left: 18px; right: 18px; top: 7px; bottom: auto; width: auto; height: 4px; }
+  }
+  @media (max-width: 460px) {
+    .row-2 { grid-template-columns: 1fr; }
+    .hero-art .sticker { font-size: 14px; right: 0; }
+    .nav .btn { padding: 10px 14px; font-size: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top">Whoof</a>
+    <ul>
+      <li><a href="#about">About us</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#vision">Why Whoof</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <!-- TODO: replace 91XXXXXXXXXX with your WhatsApp number (same as the footer button) -->
+    <a class="btn btn-leaf" href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">Get in touch</a>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" data-nav-dark>
+    <div class="wrap">
+      <div>
+        <h1>Your pet’s <span><span class="hl">home away from home.</span></span></h1>
+        <p class="lede">Whoof connects pet parents with loving, carefully verified hosts for personal, home-based care and greater peace of mind.</p>
+        <div class="cta-row">
+          <a class="btn btn-leaf" href="#get-started" data-open="find">Find a sitter</a>
+          <a class="btn btn-butter" href="#get-started" data-open="become">Become a sitter</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="photo main"><img src="images/hero-puppy.jpg" alt="A black and tan puppy looking up while being held in someone's lap" width="964" height="1714"></div>
+        <div class="photo side-a"><img src="images/golden-and-cat.jpg" alt="A golden retriever resting its chin on a black cat" loading="lazy"></div>
+        <div class="photo side-b"><img src="images/cat-house.jpg" alt="A tabby cat peeking out of a cardboard house" loading="lazy"></div>
+        <span class="sticker">A home, not a kennel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE ARE -->
+  <section class="pad about" id="about">
+    <div class="wrap">
+      <div class="top">
+        <h2>Who<br>We<br>Are</h2>
+        <div class="people">
+          <figure class="person">
+            <div class="photo"><img src="images/ayeshaa.jpg" alt="Ayeshaa playing with a golden retriever rolling on its back" loading="lazy"></div>
+            <figcaption><span class="name">Ayeshaa Mohan<a class="li" href="https://www.linkedin.com/in/ayeshaa-mohan/" target="_blank" rel="noopener" aria-label="Ayeshaa Mohan on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" transform="translate(-1.25 0.25)" d="M7 9.5h2.6V18H7zM8.3 5.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM11.2 9.5h2.5v1.2c.4-.7 1.3-1.4 2.6-1.4 2.7 0 3.2 1.8 3.2 4.1V18h-2.6v-4c0-1 0-2.2-1.4-2.2s-1.6 1.1-1.6 2.1V18h-2.7z"/></svg></a></span></figcaption>
+          </figure>
+          <figure class="person">
+            <div class="photo"><img src="images/kushagre.jpg" alt="Kushagre sitting outdoors with a light-coloured dog" loading="lazy"></div>
+            <figcaption><span class="name">Kushagre Gupta<a class="li" href="https://www.linkedin.com/in/kushagre-gupta/" target="_blank" rel="noopener" aria-label="Kushagre Gupta on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" transform="translate(-1.25 0.25)" d="M7 9.5h2.6V18H7zM8.3 5.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM11.2 9.5h2.5v1.2c.4-.7 1.3-1.4 2.6-1.4 2.7 0 3.2 1.8 3.2 4.1V18h-2.6v-4c0-1 0-2.2-1.4-2.2s-1.6 1.1-1.6 2.1V18h-2.7z"/></svg></a></span></figcaption>
+          </figure>
+          <figure class="person">
+            <div class="photo"><img src="images/milo.jpg" alt="Milo the golden retriever wearing sunglasses" loading="lazy"></div>
+            <figcaption><span class="name">Milo :)</span><small>The dog behind the inspiration</small></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="pad how" id="how">
+    <div class="wrap">
+      <div class="how-head">
+        <h2>How it works?</h2>
+        <span class="script" aria-hidden="true">3 simple steps</span>
+      </div>
+      <div class="steps" id="steps">
+        <article class="step s1 is-open">
+          <button class="step-tab" type="button" aria-expanded="true" aria-controls="step-1" tabindex="-1" aria-label="Step 1: tell us about your dog"></button>
+          <span class="step-num" aria-hidden="true">1</span>
+          <h3 class="step-title"><span class="t-hand" aria-hidden="true">tell us about your dog</span><span class="t-display">Tell us about your dog</span></h3>
+          <div class="step-body" id="step-1">
+            <p>Fill in a short form telling us when you need help and anything else we should know.</p>
+            <div class="step-art">
+              <div class="photo"><img src="images/golden-flower.jpg" alt="A golden retriever with a pink flower on its head" loading="lazy"></div>
+              <span class="tag tag-a">Loves playing fetch!</span>
+              <span class="tag tag-b">Fav snack: yoghurt</span>
+              <span class="tag tag-c">Likes his alone time</span>
+            </div>
+          </div>
+        </article>
+        <article class="step s2">
+          <button class="step-tab" type="button" aria-expanded="false" aria-controls="step-2" aria-label="Step 2: meet us first"></button>
+          <span class="step-num" aria-hidden="true">2</span>
+          <h3 class="step-title"><span class="t-hand" aria-hidden="true">meet us first</span><span class="t-display">Meet us first</span></h3>
+          <div class="step-body" id="step-2">
+            <p>Come over with your dog, or hop on a call. You see where they'll stay, and we learn what makes them happy.</p>
+            <div class="step-art">
+              <div class="photo"><img src="images/kushagre.jpg" alt="Kushagre sitting outdoors with a light-coloured dog" loading="lazy"></div>
+              <span class="tag tag-a">Home visit</span>
+              <span class="tag tag-b">Or a quick video call</span>
+              <span class="tag tag-c">Meet the resident pets</span>
+            </div>
+          </div>
+        </article>
+        <article class="step s3">
+          <button class="step-tab" type="button" aria-expanded="false" aria-controls="step-3" aria-label="Step 3: travel worry-free"></button>
+          <span class="step-num" aria-hidden="true">3</span>
+          <h3 class="step-title"><span class="t-hand" aria-hidden="true">travel worry-free</span><span class="t-display">Travel worry-free</span></h3>
+          <div class="step-body" id="step-3">
+            <p>Your dog stays in a real home. We send photo and video updates, and you can reach us any time during the sit.</p>
+            <div class="step-art">
+              <div class="photo wide"><img src="images/milo.jpg" alt="Milo the golden retriever wearing sunglasses" loading="lazy"></div>
+              <span class="tag tag-a">Daily photo updates <span class="emoji">📸</span></span>
+              <span class="tag tag-b">Walks, twice a day</span>
+              <span class="tag tag-c">WhatsApp us anytime</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section class="pad vision" id="vision">
+    <div class="wrap">
+      <div class="copy">
+        <h2 class="section-title">Our Vision</h2>
+        <p>Pet parents often struggle to find someone they trust with their pet when they travel. They lean on friends, family and WhatsApp groups, or on kennels that can feel impersonal and a little scary.</p>
+        <p>Whoof is a trust-first pet-sitting network that makes those connections easier to discover and easier to trust.</p>
+        <blockquote>
+          <div class="bubble">
+            <span class="paws emoji" aria-hidden="true">🐾</span>
+            <p class="quote">“I plan my trips around my dog. If I can’t find someone I trust, I just cancel the plan.”</p>
+            <footer class="by"><svg viewBox="0 0 34 12" aria-hidden="true"><path d="M2 8c4-6 7-6 10 0s6 6 10 0 7-6 10 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>a pet parent we interviewed</footer>
+          </div>
+        </blockquote>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <h3><span>Trust first</span></h3>
+          <p>Curated, verified hosts close to your home. You visit or call them before you leave your pet.</p>
+        </div>
+        <div class="pillar">
+          <h3><span>Peace of mind</span></h3>
+          <p>Photo and video updates during your pet’s stay, and the Whoof team is available throughout the sit!</p>
+        </div>
+        <!-- TODO: swap this placeholder for a scan of your real handwritten note -->
+        <div class="note" role="img" aria-label="Handwritten note from the Whoof founders">
+          Every dog who stays with us gets their own bed, their usual walks, and lots of belly rubs. Promise!
+          <span class="sig">— Ayeshaa &amp; Kushagre</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPLIT CTA → expands into the form panel -->
+  <section class="split" id="get-started" data-state="closed" aria-label="Get started">
+    <div class="left">
+      <h2>Your dog deserves <br class="br-d">a home away <br class="br-d">from home.</h2>
+      <p>Find a loving host who can give your dog personal care and attention while you’re away.</p>
+      <button class="btn btn-leaf" type="button" data-open="find">Find a sitter</button>
+    </div>
+    <div class="right">
+      <h2>Become a <br class="br-d">vacation home <br class="br-d">for a dog</h2>
+      <p>Love dogs? Become a sitter with us and spend quality time with some cutieesss.</p>
+      <button class="btn btn-forest" type="button" data-open="become">Become a sitter</button>
+    </div>
+    <div class="photo"><img src="images/golden-flower.jpg" alt="A golden retriever with a pink flower on its head" loading="lazy"></div>
+    <div class="wipe" aria-hidden="true"></div>
+
+    <div class="panel" id="forms" hidden>
+      <div class="notebook">
+        <div class="tabs" role="tablist" aria-label="Choose a form" aria-orientation="vertical">
+          <button class="tab" type="button" role="tab" id="tab-find" aria-controls="find" data-tab="find"><span>Find a sitter</span></button>
+          <button class="tab" type="button" role="tab" id="tab-become" aria-controls="become" data-tab="become"><span>Become a sitter</span></button>
+        </div>
+        <div class="cards">
+          <button class="close" type="button" data-close aria-label="Close the form">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+          </button>
+          <div class="card" id="find" role="tabpanel" aria-labelledby="tab-find">
+            <form data-form="find" novalidate>
+              <p class="intro">Tell us a little about yourself and your dog so we can understand the kind of care you’re looking for.</p>
+              <input type="hidden" name="_subject" value="Whoof: new pet parent enquiry">
+              <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+              <div class="row-2">
+                <div class="field"><label for="f-email">Email address</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+                <div class="field"><label for="f-phone">Phone / WhatsApp</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+              </div>
+              <div class="field"><label for="f-city">City / area</label><input id="f-city" name="city" placeholder="e.g. Gurgaon, Sector 54" required></div>
+              <div class="row-2">
+                <div class="field"><label for="f-dog">Your dog’s name</label><input id="f-dog" name="dog_name" required></div>
+                <div class="field"><label for="f-breed">Breed &amp; size <span class="opt">(optional)</span></label><input id="f-breed" name="dog_breed_size" placeholder="e.g. Indie, medium"></div>
+              </div>
+              <fieldset class="field">
+                <legend>Approximate care dates <span class="opt">(optional)</span></legend>
+                <div class="row-2">
+                  <div><label class="sub" for="f-from">Care from</label><input id="f-from" name="dates_from" type="date"></div>
+                  <div><label class="sub" for="f-to">Care till</label><input id="f-to" name="dates_to" type="date"></div>
+                </div>
+              </fieldset>
+              <div class="field"><label for="f-notes">Anything else we should know? <span class="opt">(optional)</span></label><textarea id="f-notes" name="notes"></textarea></div>
+              <div class="form-actions">
+                <button class="btn btn-leaf" type="submit">Send my details</button>
+              </div>
+              <p class="form-error" role="alert"></p>
+            </form>
+          </div>
+
+          <div class="card" id="become" role="tabpanel" aria-labelledby="tab-become" hidden>
+            <form data-form="become" novalidate>
+              <p class="intro">Tell us a little about yourself and your experience with dogs.</p>
+              <input type="hidden" name="_subject" value="Whoof: new sitter application">
+              <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <div class="field"><label for="b-name">Your name</label><input id="b-name" name="name" autocomplete="name" required></div>
+              <div class="row-2">
+                <div class="field"><label for="b-email">Email address</label><input id="b-email" name="email" type="email" autocomplete="email" required></div>
+                <div class="field"><label for="b-phone">Phone / WhatsApp</label><input id="b-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+              </div>
+              <div class="field"><label for="b-city">City / area</label><input id="b-city" name="city" required></div>
+              <div class="field"><label for="b-exp">Your experience with dogs</label><textarea id="b-exp" name="experience" required></textarea></div>
+              <div class="field"><label for="b-pets">Do you currently have pets of your own? <span class="opt">(optional)</span></label><input id="b-pets" name="own_pets"></div>
+              <div class="field"><label for="b-notes">Anything else we should know? <span class="opt">(optional)</span></label><textarea id="b-notes" name="notes"></textarea></div>
+              <div class="form-actions">
+                <button class="btn btn-forest" type="submit">Send my details</button>
+              </div>
+              <p class="form-error" role="alert"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="pad faq" id="faq">
+    <div class="wrap">
+      <div class="side">
+        <h2 class="section-title">Good questions.</h2>
+        <p>Can't find what you're looking for? <span><a href="#contact">Message us</a> and we'll happily answer.</span></p>
+      </div>
+      <div>
+        <details>
+          <summary>How much does it cost?</summary>
+          <p>It depends on how long the stay is and what your dog needs. We'll share pricing on our first call, before you commit to anything. The meet &amp; greet is always free.</p>
+        </details>
+        <details>
+          <summary>Which dogs can stay with you?</summary>
+          <p>We welcome most friendly dogs, big or small, indie or pedigree. If your dog is reactive, very young, elderly or needs medication, tell us in the form and we'll chat about whether we're the right fit.</p>
+        </details>
+        <details>
+          <summary>Do you sit cats too?</summary>
+          <p>Right now we focus on dogs. If you have a cat, get in touch anyway, because we're building out our network of hosts.</p>
+        </details>
+        <details>
+          <summary>Do dogs need to be vaccinated?</summary>
+          <p>Yes. We ask that dogs are up to date on core vaccinations (including rabies) and on tick &amp; flea prevention, to keep every guest safe.</p>
+        </details>
+        <details>
+          <summary>What happens in an emergency?</summary>
+          <p>Before the stay, we note your vet's details and an emergency contact. If anything comes up, we call you straight away and take your dog to the nearest vet if needed.</p>
+        </details>
+        <details>
+          <summary>What should I pack?</summary>
+          <p>Their usual food (sudden switches upset tummies), any medication, a leash, and something that smells like home: a favourite toy, blanket or bed.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER / CONTACT -->
+<footer class="site wave" id="contact" data-nav-dark>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <p class="big">Questions? <span>Just say woof.</span></p>
+        <!-- TODO: replace 91XXXXXXXXXX with your WhatsApp number (country code, no + or spaces) -->
+        <a class="btn btn-leaf wa" href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+      <div>
+        <h4>Reach us</h4>
+        <ul>
+          <li><a href="mailto:hello@whoof.in">hello@whoof.in</a></li><!-- TODO: real email -->
+          <li><a href="https://www.linkedin.com/company/TODO" target="_blank" rel="noopener">LinkedIn</a></li><!-- TODO: real LinkedIn page -->
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#get-started" data-open="find">Find / Become a sitter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <span>© <span id="yr">2026</span> Whoof. Made with <span class="heart" aria-label="love">♥</span> (and dog hair).</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Formspree setup ──────────────────────────────────────────
+  // 1. Create two forms at https://formspree.io (free plan is fine)
+  // 2. Paste each form's ID (the part after /f/) below
+  const FORMSPREE_FIND_ID = "YOUR_FIND_FORM_ID";
+  const FORMSPREE_SITTER_ID = "YOUR_SITTER_FORM_ID";
+  // ─────────────────────────────────────────────────────────────
+
+  const ids = { find: FORMSPREE_FIND_ID, become: FORMSPREE_SITTER_ID };
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  const split = document.getElementById("get-started");
+  const panel = document.getElementById("forms");
+  const wipe = split.querySelector(".wipe");
+  const tabs = [...panel.querySelectorAll("[role=tab]")];
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+
+  const scrollBehavior = () => (reduceMotion.matches ? "auto" : "smooth");
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  let busy = false;
+
+  function selectTab(mode, focusTab) {
+    split.dataset.state = mode;
+    tabs.forEach((t) => {
+      const on = t.dataset.tab === mode;
+      t.setAttribute("aria-selected", on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      if (on && focusTab) t.focus();
+    });
+  }
+
+  function focusFirstField() {
+    const first = panel.querySelector(".card:not([hidden]) input:not([type=hidden]):not(.hp)");
+    if (first) first.focus({ preventScroll: true });
+  }
+
+  // CTA → the clicked half's colour wipes across the split, then the form fades in
+  async function openPanel(mode) {
+    if (!panel.hidden) {
+      selectTab(mode);
+      split.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+      return;
+    }
+    if (busy) return;
+    busy = true;
+    const top = split.getBoundingClientRect().top;
+    if (top < 0 || top > innerHeight * 0.4) {
+      split.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+      if (!reduceMotion.matches) await wait(550);
+    }
+    if (!reduceMotion.matches) {
+      wipe.dataset.mode = mode;
+      wipe.classList.add("on");
+      await wait(20);
+      wipe.classList.add("full");
+      await wait(620);
+    }
+    panel.hidden = false;
+    selectTab(mode);
+    panel.classList.remove("enter");
+    void panel.offsetWidth;
+    panel.classList.add("enter");
+    wipe.className = "wipe";
+    busy = false;
+    setTimeout(focusFirstField, 300);
+  }
+
+  // Closing replays the split's entrance: halves slide in from either side and meet, then the photo pops in
+  async function closePanel() {
+    if (busy) return;
+    busy = true;
+    const mode = split.dataset.state;
+    const halves = split.querySelectorAll(":scope > .left, :scope > .right");
+    halves.forEach((h) => (h.style.transition = "none"));
+    split.classList.remove("in");
+    panel.hidden = true;
+    split.dataset.state = "closed";
+    split.scrollIntoView({ behavior: "auto", block: "start" });
+    void split.offsetWidth;
+    halves.forEach((h) => (h.style.transition = ""));
+    split.classList.add("in");
+    if (!reduceMotion.matches) await wait(900);
+    busy = false;
+    const back = split.querySelector(`[data-open="${mode}"]`);
+    if (back) back.focus({ preventScroll: true });
+  }
+
+  document.addEventListener("click", (e) => {
+    const opener = e.target.closest("[data-open]");
+    if (opener) { e.preventDefault(); openPanel(opener.dataset.open); return; }
+    if (e.target.closest("[data-close]")) { e.preventDefault(); closePanel(); }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !panel.hidden) closePanel();
+  });
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => selectTab(t.dataset.tab));
+    t.addEventListener("keydown", (e) => {
+      if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) return;
+      e.preventDefault();
+      selectTab(tabs[(i + 1) % tabs.length].dataset.tab, true);
+    });
+  });
+
+  // Nav glass: light text over the dark hero and footer, dark text everywhere else
+  const nav = document.querySelector(".nav");
+  let navTicking = false;
+  function updateNavTone() {
+    navTicking = false;
+    const r = nav.getBoundingClientRect();
+    nav.style.pointerEvents = "none";
+    const under = document.elementFromPoint(innerWidth / 2, r.top + r.height / 2);
+    nav.style.pointerEvents = "";
+    nav.classList.toggle("on-dark", !!(under && under.closest("[data-nav-dark]")));
+  }
+  addEventListener("scroll", () => { if (!navTicking) { navTicking = true; requestAnimationFrame(updateNavTone); } }, { passive: true });
+  addEventListener("resize", updateNavTone);
+  updateNavTone();
+
+  // How it works: one panel open at a time, advancing every few seconds while on screen and not hovered
+  const stepsEl = document.getElementById("steps");
+  const steps = [...stepsEl.querySelectorAll(".step")];
+  const STEP_DELAY = 11000;
+  let current = 0, stepTimer, stepsHovered = false, stepsInView = false;
+  function scheduleStep() {
+    clearTimeout(stepTimer);
+    if (reduceMotion.matches) return;
+    stepTimer = setTimeout(() => {
+      if (stepsHovered || !stepsInView) return scheduleStep();
+      openStep((current + 1) % steps.length);
+    }, STEP_DELAY);
+  }
+  function openStep(i) {
+    current = i;
+    steps.forEach((s, j) => {
+      const on = j === i;
+      const tab = s.querySelector(".step-tab");
+      s.classList.toggle("is-open", on);
+      tab.setAttribute("aria-expanded", on);
+      tab.tabIndex = on ? -1 : 0;
+    });
+    scheduleStep();
+  }
+  steps.forEach((s, i) => s.querySelector(".step-tab").addEventListener("click", () => openStep(i)));
+  stepsEl.addEventListener("mouseenter", () => (stepsHovered = true));
+  stepsEl.addEventListener("mouseleave", () => (stepsHovered = false));
+  stepsEl.addEventListener("focusin", () => (stepsHovered = true));
+  stepsEl.addEventListener("focusout", () => (stepsHovered = false));
+  openStep(0);
+
+  // Only auto-advance while the steps are on screen; slide the split in the first time it's seen
+  new IntersectionObserver(([e]) => (stepsInView = e.isIntersecting), { threshold: 0.4 }).observe(stepsEl);
+  split.classList.add("pre");
+  const splitObserver = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    split.classList.add("in");
+    splitObserver.disconnect();
+  }, { threshold: 0.3 });
+  splitObserver.observe(split);
+
+  // Care dates: no past dates, and "To" can't be before "From"
+  const fromDate = document.getElementById("f-from");
+  const toDate = document.getElementById("f-to");
+  const now = new Date();
+  const today = new Date(now - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  fromDate.min = toDate.min = today;
+  fromDate.addEventListener("change", () => {
+    toDate.min = fromDate.value || today;
+    if (toDate.value && toDate.value < fromDate.value) toDate.value = fromDate.value;
+  });
+
+  function escapeHTML(s) {
+    return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+
+  document.querySelectorAll("form[data-form]").forEach((form) => {
+    const err = form.querySelector(".form-error");
+    const btn = form.querySelector("button[type=submit]");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      err.textContent = "";
+
+      // Validation using the browser's built-in rules
+      const bad = [...form.elements].find((el) => el.willValidate && !el.checkValidity());
+      if (bad) {
+        const label = form.querySelector(`label[for="${bad.id}"]`);
+        err.textContent = `Please check “${label ? label.childNodes[0].textContent.trim() : "this field"}”.`;
+        bad.focus();
+        return;
+      }
+
+      const id = ids[form.dataset.form];
+      if (!id || id.startsWith("YOUR_")) {
+        err.textContent = "This form isn't connected yet. Please message us on WhatsApp for now.";
+        return;
+      }
+
+      btn.disabled = true;
+      const label = btn.textContent;
+      btn.textContent = "Sending…";
+      try {
+        const res = await fetch(`https://formspree.io/f/${id}`, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        if (!res.ok) throw new Error("bad status " + res.status);
+        // Only show the thank-you once Formspree confirms receipt
+        const name = (form.elements.name.value || "").trim().split(/\s+/)[0] || "friend";
+        const card = form.parentElement;
+        card.innerHTML = `
+          <div class="thanks" tabindex="-1">
+            <h3>Thank you, ${escapeHTML(name)}.</h3>
+            <p>We’ve got your details and we’ll read them carefully. Whoof is still being built, so we can’t promise a booking or a reply time yet.</p>
+            <button class="btn btn-forest" type="button" data-close>Back to the story</button>
+          </div>`;
+        card.querySelector(".thanks").focus();
+      } catch (_) {
+        err.textContent = "Something went wrong sending that. Please try again, or message us on WhatsApp.";
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    });
+  });
+</script>
+</body>
+</html>
